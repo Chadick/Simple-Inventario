@@ -17,14 +17,13 @@ public class SimpleInventario {
         }
     }
 
-    public static String obtenerPrecioArticulo(String articulo,double precio) {
-        double formula=(Math.random()*5000)+100;
-        if (articulo.startsWith("mar") && precio>=0){
-            return "articulo "+articulo+" tiene un valor  de  RD$ "+formula;
-        }else if (articulo.startsWith("tab")||precio>=12000){
-              return "articulo"+articulo+"tiene un valor que sobrepasa los RD$ 12,000"+ formula;
-        }else{
-            return "ninguno de los escenarios pudo aplicar";
+    public static double obtenerPrecioArticulo() {
+        double precio=(Math.random()*5000)+100;
+        if (precio>0){
+            return precio;
+        }
+       else {
+            return -1;
         }
     }
 
@@ -50,9 +49,35 @@ public class SimpleInventario {
             System.out.println("usted ha ingresado el articulo " + nombre);
             return nombre;
         } else {
-            return ("errorDeOperacion");
+            return "errorDeOperacion";
         }
 
     }
+
+    public static void modificarArticulo(){
+       String nombre=obtenerNombreArticulo();
+       Double precio=obtenerPrecioArticulo();
+        if (nombre.startsWith("A")|| nombre.startsWith("D")){
+          obtenerPrecioArticulo();
+            if (precio>150 && precio<=250){
+                precio += (precio*0.02); // precio = precio + (precio *0.02)
+                System.out.printf(nombre + " " + precio);
+            }else if (precio>250 && precio<=500){
+                precio += (precio*0.08); //precio = precio + (precio *0.08)
+                System.out.printf(nombre + " " + precio);
+            }else {
+                precio += (precio*0.12); // precio = precio + (precio *0.12)
+                System.out.printf(nombre + " " + precio);
+            }
+        }else if (nombre.startsWith("C")||nombre.startsWith("M")){
+            precio -= (precio*0.20); //precio = precio - (precio *0.20)
+            System.out.printf(nombre + " " + precio);
+        }
+
+    }
+
+
+
+
 }
 
